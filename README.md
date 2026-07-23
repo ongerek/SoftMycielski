@@ -6,9 +6,7 @@ Attention*.
 
 The paper studies the predictor
 
-$$p_\beta(a \mid x_1^n) \;=\; (1-\nu)\,
-\frac{\sum_{m<n} \mathbf{1}[x_{m+1}=a]\, e^{\beta \ell(m,n)}}
-     {\sum_{m<n} e^{\beta \ell(m,n)}} \;+\; \frac{\nu}{A},$$
+$$p_\beta(a \mid x_1^n) \;=\; (1-\nu)\, \frac{\sum_{m < n} \mathbf{1}[x_{m+1}=a]\, e^{\beta \ell(m,n)}}{\sum_{m < n} e^{\beta \ell(m,n)}} \;+\; \frac{\nu}{A},$$
 
 where $\ell(m,n)$ is the length of the agreement between the suffix
 ending at position $m$ and the suffix ending at position $n$. This is a
