@@ -137,6 +137,4 @@ See `CITATION.cff` (GitHub's citation widget reads this) or
 
 ## License
 
-See `LICENSE`. **The license file is a template**: confirm that the MIT
-terms and the copyright line are what you and your institution intend
-before publishing the repository.
+MIT — see [LICENSE] 
