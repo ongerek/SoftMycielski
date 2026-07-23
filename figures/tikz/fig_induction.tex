@@ -1,0 +1,67 @@
+% fig_induction.tex -- the induction head as a finite-temperature
+% Mycielski predictor.  Same running example as Fig.~1.
+\begin{tikzpicture}[font=\small,
+  sym/.style={draw,minimum size=0.46cm,inner sep=0pt,font=\scriptsize},
+  lab/.style={font=\scriptsize,gray!60!black}]
+
+% ================= (a) the attention picture ============================
+\node[font=\scriptsize\bfseries,anchor=west] at (0,1.55)
+  {(a) what an induction head does};
+
+\foreach \i/\c in {1/a,2/b,3/r,4/a,5/c,6/a,7/d,8/a,9/b,10/r,11/a}
+  \node[sym] (t\i) at ({0.55+(\i-1)*0.62},1.0) {\texttt{\c}};
+\foreach \i in {1,...,11}
+  \node[font=\tiny,gray!55] at ({0.55+(\i-1)*0.62},1.42) {\i};
+
+% query marker
+\draw[gray!55] (t11.south) -- ++(0,-0.16);
+\node[lab,anchor=west] at ({0.55+10*0.62+0.16},0.62) {query};
+
+% attention arcs: width proportional to exp(beta*ell) at beta = 1
+\draw[-{Stealth[length=4pt]},orange!85!black,line width=2.0pt,opacity=0.85]
+  (t11.south) .. controls +(0,-0.95) and +(0,-0.95) .. (t5.south);
+\draw[-{Stealth[length=3pt]},blue!60!black,line width=0.8pt]
+  (t11.south) .. controls +(0,-0.62) and +(0,-0.62) .. (t2.south);
+\draw[-{Stealth[length=3pt]},blue!60!black,line width=0.8pt]
+  (t11.south) .. controls +(0,-0.42) and +(0,-0.42) .. (t7.south);
+\draw[-{Stealth[length=3pt]},blue!60!black,line width=0.8pt]
+  (t11.south) .. controls +(0,-0.28) and +(0,-0.28) .. (t9.south);
+\foreach \j in {3,4,6,8,10}
+  \draw[-{Stealth[length=2pt]},gray!45,line width=0.12pt]
+    (t11.south) .. controls +(0,-0.18) and +(0,-0.18) .. (t\j.south);
+
+\node[lab,anchor=north west,text width=7.4cm,align=left] at (0,-1.15)
+  {The head scores each earlier position by how far back its context
+   agrees with the present one, then copies what followed. Arc width is
+   the attention weight $\propto e^{\beta\ell(m,t)}$ at $\beta=1$: the
+   position after the four-symbol match \texttt{abra} takes $79\%$ of it.};
+
+% ================= (b) the correspondence ===============================
+\node[font=\scriptsize\bfseries,anchor=west] at (9.0,1.55)
+  {(b) the same computation, renamed};
+
+\node[font=\scriptsize\itshape,anchor=east] at (12.35,1.05) {induction head};
+\node[font=\scriptsize\itshape,anchor=west] at (12.95,1.05)
+  {soft Mycielski};
+\draw[gray!45] (9.0,0.85) -- (17.0,0.85);
+
+\foreach \r/\l/\rr in {%
+  0/{query}/{suffix $x_{t-\ell+1}^{\,t}$},
+  1/{key agreement}/{match length $\ell(m,t)$},
+  2/{attention logit}/{$\beta\,\ell(m,t)$},
+  3/{softmax temperature}/{inverse temperature $\beta$},
+  4/{attended value}/{continuation $x_{m+1}$},
+  5/{head output}/{$p_\beta(\cdot\mid x_1^t)$}} {
+  \node[font=\scriptsize,anchor=east] at (12.35,{0.5-\r*0.365}) {\l};
+  \node[font=\scriptsize,gray!55] at (12.65,{0.5-\r*0.365}) {$\equiv$};
+  \node[font=\scriptsize,anchor=west] at (12.95,{0.5-\r*0.365}) {\rr};
+}
+
+\draw[gray!45] (9.0,-1.45) -- (17.0,-1.45);
+\node[anchor=north west,font=\scriptsize,text width=8.0cm,align=left]
+  at (9.0,-1.55)
+  {One free parameter is left, and the entropy rate is its phase
+   boundary: $\beta<H$ mixes many context orders, $\beta>H$ collapses
+   onto the single longest match.};
+
+\end{tikzpicture}

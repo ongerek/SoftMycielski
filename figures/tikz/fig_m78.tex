@@ -1,0 +1,64 @@
+% fig_m78.tex -- the Mycielski-78 streaming realization.
+% Parse, trie and suffix nodes verified in verif_v11/v11_figdata.m.
+\begin{tikzpicture}[font=\small,
+  sym/.style={draw,minimum size=0.42cm,inner sep=0pt,font=\scriptsize},
+  nd/.style={draw,circle,inner sep=1pt,minimum size=0.52cm,
+             font=\scriptsize,fill=blue!8},
+  lab/.style={font=\scriptsize,gray!60!black}]
+
+% ============ (a) the LZ78 parse ========================================
+\node[font=\scriptsize\bfseries,anchor=west] at (0,1.05)
+  {(a) LZ78 phrase parse};
+\foreach \i/\c in {1/a,2/b,3/r,4/a,5/c,6/a,7/d,8/a,9/b,10/r,11/a}
+  \node[sym] at ({0.3+(\i-1)*0.45},0.35) {\texttt{\c}};
+\foreach \bxx in {0.525,0.975,1.425,2.325,3.225,4.125}
+  \draw[red!70!black,thick] ({\bxx},0.62) -- ({\bxx},0.08);
+\foreach \cx/\ph in {0.3/a,0.75/b,1.2/r,1.875/ac,2.775/ad,3.675/ab,4.575/ra}
+  \node[lab] at ({\cx},-0.15) {\texttt{\ph}};
+\node[lab,anchor=north west,text width=5.25cm,align=left] at (0,-0.42)
+  {$7$ phrases. Every boundary returns the parse pointer to the root:
+   this is the \emph{context reset}, worth $+0.223$ nats (Sec.~VI).};
+
+% ============ (b) the resulting trie ====================================
+\node[font=\scriptsize\bfseries,anchor=west] at (6.0,1.05)
+  {(b) dictionary trie};
+\node[nd,fill=gray!12] (rt) at (7.6,0.45) {$\varepsilon$};
+\node[nd] (na) at (6.6,-0.45) {\texttt{a}};
+\node[nd] (nb) at (7.7,-0.45) {\texttt{b}};
+\node[nd] (nr) at (8.7,-0.45) {\texttt{r}};
+\node[nd] (nac) at (5.95,-1.45) {\texttt{ac}};
+\node[nd] (nad) at (6.75,-1.45) {\texttt{ad}};
+\node[nd] (nab) at (7.55,-1.45) {\texttt{ab}};
+\node[nd] (nra) at (8.7,-1.45) {\texttt{ra}};
+\draw[-{Stealth[length=3pt]}] (rt) -- (na) node[midway,left=-1pt,font=\tiny]{a};
+\draw[-{Stealth[length=3pt]}] (rt) -- (nb) node[midway,right=-1pt,font=\tiny]{b};
+\draw[-{Stealth[length=3pt]}] (rt) -- (nr) node[midway,right=-1pt,font=\tiny]{r};
+\draw[-{Stealth[length=3pt]}] (na) -- (nac) node[midway,left=-1pt,font=\tiny]{c};
+\draw[-{Stealth[length=3pt]}] (na) -- (nad) node[midway,right=-2pt,font=\tiny]{d};
+\draw[-{Stealth[length=3pt]}] (na) -- (nab) node[midway,right=-1pt,font=\tiny]{b};
+\draw[-{Stealth[length=3pt]}] (nr) -- (nra) node[midway,right=-1pt,font=\tiny]{a};
+
+% ============ (c) per-order suffix tracking =============================
+\node[font=\scriptsize\bfseries,anchor=west] at (10.4,1.05)
+  {(c) M78-R: one node per order};
+\node[anchor=west,font=\scriptsize] at (10.4,0.45)
+  {$\mathrm{node}_k(t{+}1)=\mathrm{child}\bigl(\mathrm{node}_{k-1}(t),
+    x_{t+1}\bigr)$};
+\node[lab,anchor=west] at (10.4,0.05) {suffix of $x_1^{11}$:};
+\foreach \k/\s/\r/\col in {1/a/\texttt{a}/{green!45!black},
+                           2/ra/\texttt{ra}/{green!45!black},
+                           3/bra/absent/{red!70!black},
+                           4/abra/absent/{red!70!black}} {
+  \node[lab,anchor=west] at (10.4,{-0.35-(\k-1)*0.36})
+    {$k{=}\k$};
+  \node[anchor=west,font=\scriptsize] at (11.15,{-0.35-(\k-1)*0.36})
+    {\texttt{\s}};
+  \node[anchor=west,font=\scriptsize,\col] at (12.35,{-0.35-(\k-1)*0.36})
+    {$\rightarrow$ \r};
+}
+\node[lab,anchor=west,text width=6.3cm] at (10.4,-2.05)
+  {exact search finds $\ell=4$ here, but the dictionary indexes only to
+   depth $2$: the trie is a \emph{sparse} index of the past, which is what
+   the $O(K)$ speed buys};
+
+\end{tikzpicture}
