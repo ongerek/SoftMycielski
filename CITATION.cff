@@ -13,12 +13,11 @@ type: software
 authors:
   - family-names: Gerek
     given-names: "Ömer Nezih"
-    orcid: "https://orcid.org/0000-0000-0000-0000"   # TODO: your ORCID
+    orcid: "https://orcid.org/0000-0001-8183-1356"   
     affiliation: "Eskişehir Technical University"
     email: ongerek@eskisehir.edu.tr
-# TODO: add co-authors here, in the order used on the paper.
-license: MIT            # TODO: confirm before publishing
-repository-code: "https://github.com/USER/REPO"      # TODO
+license: MIT            
+repository-code: "https://github.com/ongerek/SoftMycielski"      # TODO
 keywords:
   - universal prediction
   - Mycielski predictor
@@ -34,6 +33,6 @@ preferred-citation:
     - family-names: Gerek
       given-names: "Ömer Nezih"
       affiliation: "Eskişehir Technical University"
-  journal: "IEEE Transactions on Information Theory"   # TODO: confirm on acceptance
+  journal: "Submitted to IEEE Transactions on Information Theory"   # TODO: confirm on acceptance
   year: 2026                                           # TODO
   # volume, issue, start, doi to be filled on acceptance
