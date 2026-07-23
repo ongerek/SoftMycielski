@@ -1,0 +1,39 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the paper below."
+title: "Soft Mycielski Prediction and the Critical Temperature of Attention — verification code"
+abstract: >-
+  Verification code, figure sources and reproduction instructions for
+  the paper "Soft Mycielski Prediction and the Critical Temperature of
+  Attention", which studies a finite-temperature relaxation of the
+  Ehrenfeucht-Mycielski predictor, shows that its inverse temperature
+  has a critical value at the entropy rate of the source, and proves a
+  two-sided separation between path-adaptive and deterministic
+  temperature schedules.
+type: software
+authors:
+  - family-names: Gerek
+    given-names: "Ömer Nezih"
+    orcid: "https://orcid.org/0000-0000-0000-0000"   # TODO: your ORCID
+    affiliation: "Eskişehir Technical University"
+    email: ongerek@eskisehir.edu.tr
+# TODO: add co-authors here, in the order used on the paper.
+license: MIT            # TODO: confirm before publishing
+repository-code: "https://github.com/USER/REPO"      # TODO
+keywords:
+  - universal prediction
+  - Mycielski predictor
+  - induction head
+  - attention
+  - entropy rate
+  - Lempel-Ziv
+  - phase transition
+preferred-citation:
+  type: article
+  title: "Soft Mycielski Prediction and the Critical Temperature of Attention"
+  authors:
+    - family-names: Gerek
+      given-names: "Ömer Nezih"
+      affiliation: "Eskişehir Technical University"
+  journal: "IEEE Transactions on Information Theory"   # TODO: confirm on acceptance
+  year: 2026                                           # TODO
+  # volume, issue, start, doi to be filled on acceptance
